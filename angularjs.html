@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="pageApp"> <!-- ng-app is REQUIRED if the page is going to use angular!! pageApp tells it which app to use-->
 <head>
 	<title></title>
 	<script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script> 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="styleshee" type="text/css" rel="stylesheet"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> <!-- this is the angular script -->
 	<script lang="javascript">
-		$().ready(function() {
-					});
+		//below pageApp is having a controller added to it, an array with four strings thats attached to $scope
+		var pageApp = angular.module("pageApp", []); // says that this is an angular module holding other modules, usually only one per 														application. for all you do in application, you have ONE ANGULAR MODULE -->
+		pageApp.controller("PageController", function PageController($scope) { //here we add a controller to the pageApp variable
+			$scope.webPages = ["Home", "Contact", "CV", "Accomplishments"] //we're adding an array to the scope object 
+		});
+
+		var webPages = ["Home", "Contact", "CV", "Accomplishments"];
 	</script>
 	<style></style>
 </head>
-<body>
-
+<body ng-controller="PageController"> <!-- specifying the controller we want to use to manage everything in the body tag and below -->
+	<h1>My First AngularJS Page</h1>
+	<p>The sum of 1 and 2 is {{1 + 2}}</p>  <!-- double braces tell angular to do something -->
+	<p>The sum of 1 and 2 is <span ng-bind="1 + 2" /></span></p> <!-- here the ng-bind does the same thing as the above, but cant be faster 
+																	with angulars workflow -->
+	<p>
+		<ul>
+			<li ng-repeat="page in webPages">{{pages}}</li> <!-- ng-repeat is like a for loop, iterates through a list of things and repeat
+														so it should generate a <li> tag for each of the items in the array-->
+		</ul>
+	</p>
 </body>
 </html>
